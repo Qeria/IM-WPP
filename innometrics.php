@@ -94,48 +94,11 @@ $script_activate = 0;
 }
 add_action( 'wp_footer', 'myscript' ,200);
 
-//
-//function admin_in_english_add_hooks() {
-//	add_filter( 'locale', 'admin_in_english_locale' );
-//}
-//add_action( 'plugins_loaded', 'admin_in_english_add_hooks' );
-//
-//function admin_in_english_locale( $locale ) {
-//	if ( admin_in_english_should_use_english() ) {
-//		return 'sv_SE';
-//	}
-//	return $locale;
-//}
-//function admin_in_english_should_use_english() {
-//	// frontend AJAX calls are mistakend for admin calls, because the endpoint is wp-admin/admin-ajax.php
-//	return admin_in_english_is_admin() && !admin_in_english_is_frontend_ajax();
-//}
-//
-//function admin_in_english_is_admin() {
-//	return
-//		is_admin() || admin_in_english_is_tiny_mce() || admin_in_english_is_login_page();
-//}
-//
-//function admin_in_english_is_frontend_ajax() {
-//	return defined( 'DOING_AJAX' ) && DOING_AJAX && false === strpos( wp_get_referer(), '/wp-admin/' );
-//}
-//
-//function admin_in_english_is_tiny_mce() {
-//	return false !== strpos( $_SERVER['REQUEST_URI'], '/wp-includes/js/tinymce/');
-//}
-//
-//function admin_in_english_is_login_page() {
-//	return false !== strpos( $_SERVER['REQUEST_URI'], '/wp-login.php' );
-//}
-
-
-
- 
 function curl($url,$params = array(),$is_coockie_set = false)
 {
  
 if(!$is_coockie_set){
-/* STEP 1. let’s create a cookie file */
+/* STEP 1. let's create a cookie file */
 $ckfile = tempnam ("/tmp", "CURLCOOKIE");
  
 /* STEP 2. visit the homepage to set the cookie properly */
@@ -164,77 +127,12 @@ curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
 $output = curl_exec ($ch);
 return $output;
 }
- 
-function Translate1($word)
+
+function mylang_translate($key)
 {
-$word = urlencode($word);
-$cur_local = get_locale();
-$name_en = explode('_',$cur_local);
+    $locale = get_locale();
+    $lang_data = include("language/{$locale}.php");
+    if (!$lang_data) $lang_data = include('language/en_US.php');
 
-$url = 'http://translate.google.com/translate_a/t?client=t&text='.$word.'&hl=en&sl=en&tl='.$name_en['0'].'&ie=UTF-8&oe=UTF-8&multires=1&otf=1&ssel=3&tsel=3&sc=1';
-
- 
-$name_en = curl($url);
-
-$name_en = explode('"',$name_en);
-return  $name_en[1];
-}
-
-
-
-function mylang_translate($word)
-{
-    global $wpdb;
-    $cur_local = get_locale();
-//    $setting_codeline = $wpdb->get_results( "SELECT * FROM `wp_language_data` WHERE `name`='".$word."'");
-//    $val = unserialize($setting_codeline['0']->language_array) ;
-//    $text = $val[$cur_local];
-//        if(!empty($text)){
-//            return $text;
-//        }
-//        else{
-//            $text = $val['en_US'];
-//            return $text;
-//        }
-        
-    if($cur_local=='fr_FR'){
-        $fetch_record = include('language/fr_FR.php');
-        return $fetch_record[$word];
-    }
-    elseif($cur_local=='da_DK'){
-        $fetch_record = include('language/da_DK.php');
-        return $fetch_record[$word];
-    }
-    elseif($cur_local=='de_DE'){
-        $fetch_record = include('language/de_DE.php');
-        return $fetch_record[$word];
-    }    
-    elseif($cur_local=='es_ES'){
-        $fetch_record = include('language/es_ES.php');
-        return $fetch_record[$word];
-    } 
-    elseif($cur_local=='fi'){
-        $fetch_record = include('language/fi.php');
-        return $fetch_record[$word];
-    }  
-    elseif($cur_local=='nl_NL'){
-        $fetch_record = include('language/nl_NL.php');
-        return $fetch_record[$word];
-    }      
-    elseif($cur_local=='no'){
-        $fetch_record = include('language/no.php');
-        return $fetch_record[$word];
-    } 
-    elseif($cur_local=='pt_BR'){
-        $fetch_record = include('language/pt_BR.php');
-        return $fetch_record[$word];
-    }  
-    elseif($cur_local=='sv_SE'){
-        $fetch_record = include('language/sv_SE.php');
-        return $fetch_record[$word];
-    }    
-    else{
-        $fetch_record = include('language/en_US.php');
-        return $fetch_record[$word];
-    }   
+    return $lang_data[$key];
 }

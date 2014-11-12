@@ -394,9 +394,13 @@ a.image_register{
 }
 
 .updated.pink-notice {border-left-color: #cc99c2 !important; margin-top: 10px !important;}
-.updated.pink-notice .button-primary{background: none repeat scroll 0 0 #cc99c2;
+.updated.pink-notice .button-primary{
+    background: none repeat scroll 0 0 #cc99c2;
     border-color: #b366a4;
     box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.15);
     color: #fff;
-    text-decoration: none !important;}
+    text-decoration: none !important;
+}
 
+table.status_table td mark.yes {color: #7ad03a;}
+table.status_table td mark {background: none repeat scroll 0 0 rgba(0, 0, 0, 0);}

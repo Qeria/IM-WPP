@@ -127,10 +127,10 @@ $page = array_key_exists('tab', $_GET) && $_GET['tab'] == 'status' ? 'status' : 
         <?php } else { ?>
         <div class="system_status_div">
 
-            <div class="updated pink-notice">
-                <p><?php echo mylang_translate('sys_stats_notice');?>:</p>
-                <p class="submit"><a href="javascript:void(0);" class="button-primary"><?php echo mylang_translate('get_stats_report');?></a></p>
-            </div>
+            <!--div class="updated pink-notice">
+                <p><?php //echo mylang_translate('sys_stats_notice');?>:</p>
+                <p class="submit"><a href="javascript:void(0);" class="button-primary"><?php //echo mylang_translate('get_stats_report');?></a></p>
+            </div-->
 
             <?php
             $site_url = get_site_url();
@@ -144,11 +144,10 @@ $page = array_key_exists('tab', $_GET) && $_GET['tab'] == 'status' ? 'status' : 
             $theme_AuthorURI = $items['AuthorURI'];
 
             ?>
-            <table class="widefat">
+            <table class="status_table widefat">
                 <thead>
                 <tr>
-                    <th style="width: 30%;"><?php echo Translate1('Variable Name'); ?>:</th>
-                    <th><?php echo Translate1('Value'); ?></th>
+                    <th style="width: 30%;"><?php echo mylang_translate('environment'); ?>:</th>
                 </tr>
                 </thead>
                 <tbody>

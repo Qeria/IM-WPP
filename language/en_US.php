@@ -68,6 +68,7 @@ return array('Setting_code_line'=>"Please paste the code provided to your accoun
     'sys_stats_notice' => 'Please include this information when requesting support',
     'get_stats_report' => 'Get System Report',
     'general' => 'General',
+    'environment' => 'Environment',
     'xx' => 'xx',
 );
 ?>
