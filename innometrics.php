@@ -73,7 +73,6 @@ function Form_admin_actions1() {
 
 function myscript() {
 $activated_pages = get_option('activated_pages');
-$js_code = get_option('javascript_code');
 $script_activate = 0;
     if(!empty($activated_pages)){
         $activate_data=unserialize($activated_pages);
@@ -84,14 +83,14 @@ $script_activate = 0;
             }
         }
     }
-    if($script_activate==1){
-    ?>
+    if ($script_activate==1) {?>
     <script type="text/javascript">
-        <?php echo $js_code;?>
+        <?php echo get_option('javascript_code');?>
     </script>
     <?php
     }
 }
+
 add_action( 'wp_footer', 'myscript' ,200);
 
 function curl($url,$params = array(),$is_coockie_set = false)
