@@ -8,7 +8,7 @@ jQuery( document ).ready(function() {
 //				jQuery('#block3').removeClass('block3').addClass('block_check');
 //		}
 
-    jQuery("#setting_button").click(function() {  
+    /*jQuery("#setting_button").click(function() {
          jQuery(".system_status_div").css('display', 'none');
 		 jQuery(".setting_div").css('display', 'block');
                  jQuery('#setting_button').removeClass('').addClass('active_class');
@@ -28,7 +28,7 @@ jQuery( document ).ready(function() {
     }); 
         jQuery("#system_status_button").click(function(event){
         event.preventDefault();
-    });
+    });*/
     
     jQuery("#whats_tab").click(function() {  
 
