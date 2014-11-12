@@ -1,10 +1,5 @@
 #wpbody{background-color: #F1F1F1;}
-/*.wrap{padding-left: 30px;}*/
-.set_outer{
-    display: block;
-    float: left;
-    padding-left: 20px;
-}
+
 .inner_wrap{
      margin-left: 20px;
 }
@@ -40,18 +35,13 @@
 	color: #D25200;
 	margin: 30px 0px 30px 0;
 }
-#setting_form{margin-left: 15px;}
 #setting_form{
 	width: 75%;
 	display: block;
 	float: left;
+    margin-top:10px;
 }
-#setting_form .setting_outer{
-	display: block;
-	float: left;
-	width: 100%;
-	margin: 10px 0px;
-}
+
 #info_form .lowerheader,#setting_form .lowerheader,.lowerheader{
 	font-size: 20px;
 	margin-bottom: 15px;
@@ -127,7 +117,7 @@
 	width: 80%;
 }
 
-#plugin_stats,#setting_track_all{margin-right: 5px;}
+#setting_track_all{margin-right: 5px;}
 
 .Activatepage_list{
 	width: 100%;
@@ -261,7 +251,6 @@ box-sizing: border-box;
 }
 .setting_tabs{
     width: 100%;
-    float: left;
     margin-bottom: 10px;
     border-bottom: 1px solid #CCC;
     padding-bottom: 0px;
@@ -403,3 +392,11 @@ a.image_register{
     right: 113px;
     top: 157px;
 }
+
+.updated.pink-notice {border-left-color: #cc99c2 !important; margin-top: 10px !important;}
+.updated.pink-notice .button-primary{background: none repeat scroll 0 0 #cc99c2;
+    border-color: #b366a4;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 1px 0 rgba(0, 0, 0, 0.15);
+    color: #fff;
+    text-decoration: none !important;}
+

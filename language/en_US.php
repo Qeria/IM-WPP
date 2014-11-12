@@ -7,7 +7,7 @@ return array('Setting_code_line'=>"Please paste the code provided to your accoun
     'Plug_in_stats'=>"Plug-in stats",
     'save_changes'=>"Save Changes",
     'pluginstat_line'=>"Allow Innometrics profile Cloud to send anonymous stats about your Wordpress installation to improve future development.",
-    'pluginstat_info'=>"See the information sent do Innometrics",
+    'pluginstat_info'=>"See the information sent to Innometrics",
     'welcome'=>"Welcome to Innometrics WP Integration",
     'instal_it'=>"Install it side-wide or select the pages you want the code to be enable.",
     'final_step'=>"Final Step!",
@@ -22,7 +22,7 @@ return array('Setting_code_line'=>"Please paste the code provided to your accoun
     'all_tracking'=>"Track all website (Recommended)",
     'some_tracking'=>"Track only some pages or posts",
     'Profile_Cloud'=>"Innometrics Profile Cloud is ready and tracking!",
-    'sent_do'=>"See the information sent do Innometrics",
+    'sent_do'=>"See the information sent to Innometrics",
     'Allow_Innometrics'=>"Allow Innometrics Profile Cloud to send anonymous stats about your Wordpress installation to improve future development.",
     'Activate_Tracking'=>"Activate Tracking",
     'Activate_innometrics'=>"Activate innometrics Profile Cloud in any page or post",
@@ -64,5 +64,10 @@ return array('Setting_code_line'=>"Please paste the code provided to your accoun
     'php_max_input'=>'PHP Max Input Vars',
     'SUHOSIN'=>'SUHOSIN Installed',
     'no_of_plugins'=>'Number of Active Plug-ins',
+    //added by Solomon
+    'sys_stats_notice' => 'Please include this information when requesting support',
+    'get_stats_report' => 'Get System Report',
+    'general' => 'General',
+    'xx' => 'xx',
 );
 ?>

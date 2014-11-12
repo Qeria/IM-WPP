@@ -74,62 +74,64 @@ $page = array_key_exists('tab', $_GET) && $_GET['tab'] == 'status' ? 'status' : 
     <div class="set_outer">
 
         <div class="pluginheader"><img src="../wp-content/plugins/<?php echo PROF_FOLDER; ?>/images/innometrics_logo.png"/></div>
-        <div class="lowerheader"><?php $setting_word = mylang_translate('Settings'); echo $setting_word;?></div>
-        <div class="setting_tabs">
+        <h1 class="lowerheader"><?php $setting_word = mylang_translate('Settings'); echo $setting_word;?></h1>
+        <h2 class="nav-tab-wrapper">
             <a href="<?php echo esc_url( admin_url('admin.php?page=innometricssetting') ); ?>"
-               id="setting_button" class="<?php echo $page == 'settings' ? 'active_class' : '';?>"> <?php echo $setting_word; ?></a>
+               class="nav-tab <?php echo $page == 'settings' ? 'nav-tab-active' : '';?>"> <?php echo mylang_translate('general'); ?></a>
             <a href="<?php echo esc_url( admin_url('admin.php?page=innometricssetting&tab=status') ); ?>"
-               id="system_status_button" class="<?php echo $page == 'status' ? 'active_class' : '';?>">
+               class="nav-tab <?php echo $page == 'status' ? 'nav-tab-active' : '';?>">
                 <?php $system_status = mylang_translate("system_status"); echo $system_status;?></a>
         </div>
         <?php if($page == 'settings') { ?>
         <div class="setting_div" id="setting_div">
             <form name="setting_form" method="post" action="" onsubmit="" id="setting_form" enctype="multipart/form-data">
-                <?php
-                $javas_code = get_option('javascript_code'); ?>
-                <div class="setting_outer">
-                    <div class="settingtitle"><?php $update_code = mylang_translate("update_code");
-                        echo $update_code;?></div>
-                    <div class="settingblock">
-                        <p><?php $setting_text = mylang_translate('Setting_code_line');
-                            echo $setting_text.' ';?><a href="#"><?php $instructions_here = mylang_translate('instructions_here');echo $instructions_here; ?></a></p><br/>
-                        <textarea rows="6" cols="80" class="javascript_code" name="javascript_code"><?php echo $javas_code; ?></textarea>
-                        <p class="submit">
-                            <input class="submit_button" type="submit" name="Submit" value="<?php $save_changes = mylang_translate('save_changes');print_r($save_changes); ?>" />
-                        </p>
-                    </div>
-                </div>
-                <?php $bv_1 = get_option('track');
-                if($bv_1=='track_all'){ ?>
-                    <div class="setting_outer">
-                        <div class="settingtitle"><?php $Tracking_All_Sites = mylang_translate('Tracking_All_Sites');print_r($Tracking_All_Sites); ?></div>
-                        <div class="settingblock">
-                            <div class="setting_block_check">
-                                <?php $bv1 = get_option('track');
-                                if($bv1=="track_all"){
-                                    $check = 'Checked';}
-                                else{$check = '';}?>
-                                <input id="setting_track_all" type="checkbox" name="track_all_sites" value="YES" <?php echo $check;?>><?php $With_this = mylang_translate('With_this');print_r($With_this); ?> <a href="#"><?php $for_more = mylang_translate('for_more');print_r($for_more); ?></a></input><br/>
-                            </div>
-                        </div>
-                    </div>
-                <?php } ?>
-                <div class="setting_outer">
-                    <div class="settingtitle"><?php $Plug_in_stats = mylang_translate('Plug_in_stats');print_r($Plug_in_stats); ?></div>
-                    <div class="settingblock">
-                        <div class="setting_block_check">
-                            <?php $bv3 = get_option('plugin_stats');
-                            if($bv3=="YES"){
-                                $check = 'Checked';}
-                            else{$check = '';}?>
-                            <input id="plugin_stats" type="checkbox" name="plugin_stats" value="YES" <?php echo $check;?>><?php $pluginstat_line = mylang_translate('pluginstat_line');print_r($pluginstat_line); ?> <a href="#"><?php $pluginstat_info = mylang_translate('pluginstat_info');print_r($pluginstat_info); ?></a></input><br/>
-                        </div>
-                    </div>
-                </div>
+                <table class="form-table">
+                    <tbody>
+                        <tr valign="top">
+                            <th><?php echo mylang_translate("update_code")?></th>
+                            <td>
+                                <p><?php echo mylang_translate("Setting_code_line")?>
+                                <a href="#"><?php echo mylang_translate('instructions_here');?></a></p>
+                                <br />
+                                <textarea rows="6" cols="80" class="javascript_code" name="javascript_code"><?php echo get_option('javascript_code'); ?></textarea>
+                            </td>
+                        </tr>
+
+                        <?php if(get_option('track')=='track_all'){ ?>
+                            <tr valign="top">
+                                <th><?php echo mylang_translate("Tracking_All_Sites")?></th>
+                                <td>
+                                    <p><input id="setting_track_all" type="checkbox" name="track_all_sites" value="YES" <?php echo get_option('track')=="track_all" ? 'checked="checked"':'';?> />
+                                    <?php echo mylang_translate('With_this'); ?> <a href="#"><?php echo mylang_translate('for_more'); ?></a></p>
+                                </td>
+                            </tr>
+                        <?php } ?>
+
+                        <tr valign="top">
+                            <th><?php echo mylang_translate("Plug_in_stats")?></th>
+                            <td>
+                                <p><input id="plugin_stats" type="checkbox" name="plugin_stats" value="YES" <?php echo get_option('plugin_stats')=="YES" ? 'checked="checked"':'';?> />
+                                <?php echo mylang_translate('pluginstat_line'); ?> <a href="#"><?php echo mylang_translate('pluginstat_info'); ?></a></p>
+                            </td>
+                        </tr>
+                        <tr valign="top">
+                            <th></th>
+                            <td>
+                                <input class="button button-large button-primary" type="submit" name="Submit" value="<?php echo mylang_translate('save_changes'); ?>" />
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </form>
         </div>
         <?php } else { ?>
         <div class="system_status_div">
+
+            <div class="updated pink-notice">
+                <p><?php echo mylang_translate('sys_stats_notice');?>:</p>
+                <p class="submit"><a href="javascript:void(0);" class="button-primary"><?php echo mylang_translate('get_stats_report');?></a></p>
+            </div>
+
             <?php
             $site_url = get_site_url();
             $my_theme = wp_get_theme();
@@ -258,7 +260,7 @@ $page = array_key_exists('tab', $_GET) && $_GET['tab'] == 'status' ? 'status' : 
                 <tbody>
                 <tr>
                     <td><?php $Installed_Plugins = mylang_translate('Installed_Plugins'); print_r($Installed_Plugins); ?>:</td>
-                    <td><div class="plugins_data"><?php $siteplugins = get_plugins( $plugin_folder );
+                    <td><div class="plugins_data"><?php $siteplugins = get_plugins();
                         $no_of_plugins=0;
                         foreach($siteplugins as $siteplugins){
                             $no_of_plugins = $no_of_plugins + 1;
@@ -340,7 +342,7 @@ function email_data2(){
     if ( defined('WP_DEBUG') && WP_DEBUG ) {$debug = 'Yes';} else {$debug = 'No';}
     $suhosin_res = extension_loaded( 'suhosin' ) ? __( 'Yes') : __( 'No');
 
-    $html .= '
+    $html = '
 <html><head></head>
 <body>
 <table class=widefat>
@@ -421,7 +423,7 @@ function email_data2(){
     <tbody>
     <tr>
         <td>Installed Plugins:</td> <td><div class="plugins_data">';
-    $siteplugins = get_plugins($plugin_folder);
+    $siteplugins = get_plugins();
     foreach ($siteplugins as $siteplugins) {
         $pluginname = $siteplugins['Name'];
         $PluginURI = $siteplugins['PluginURI'];
