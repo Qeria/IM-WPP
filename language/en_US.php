@@ -9,7 +9,7 @@ return array('Setting_code_line'=>"Please paste the code provided to your accoun
     'pluginstat_line'=>"Allow Innometrics profile Cloud to send anonymous stats about your Wordpress installation to improve future development.",
     'pluginstat_info'=>"See the information sent to Innometrics",
     'welcome'=>"Welcome to Innometrics WP Integration",
-    'instal_it'=>"Install it side-wide or select the pages you want the code to be enable.",
+    'instal_it'=>"Final step. Install it side-wide or select the pages you want the code to be enable.",
     'final_step'=>"Final Step!",
     'main_paste'=>"Paste your Innometrics Profile Cloud Tracking code provided in your account. you can find more",
     'plugin_allow'=>"This plugin allows Products you to quickly install Innometrics Profile Cloud tracking code and activate in the pages and posts you selected for a better integration. If you need help",
@@ -17,8 +17,8 @@ return array('Setting_code_line'=>"Please paste the code provided to your accoun
     'Start_again'=>"Start again?",
     'Code_Provided'=>"Code Provided. Done!",
     'Code_required'=>"Code is required",
-    'Now_tracking'=>"Done! We are now tracking your website.",
-    'start_tracking'=>"Done! You can now select the pages or posts you want to start tracking.",
+    'Now_tracking'=>"Setup Complete! We are now tracking your website.",
+    'start_tracking'=>"Setup Complete! You can now select the pages or posts you want to start tracking.",
     'all_tracking'=>"Track all website (Recommended)",
     'some_tracking'=>"Track only some pages or posts",
     'Profile_Cloud'=>"Innometrics Profile Cloud is ready and tracking!",
@@ -69,6 +69,7 @@ return array('Setting_code_line'=>"Please paste the code provided to your accoun
     'get_stats_report' => 'Get System Report',
     'general' => 'General',
     'environment' => 'Environment',
+    'tracking_notice'=>"Innometrics Profile Cloud collects anonymous stats about your Wordpress installation to improve future development.",
     'xx' => 'xx',
 );
 ?>
