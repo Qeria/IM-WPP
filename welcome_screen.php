@@ -12,6 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                 <div class="welcome_header">
                     <div class="header_outer">
                         <div class="pluginheader"><img src="../wp-content/plugins/<?php echo PROF_FOLDER; ?>/images/innometrics_logo.png"/></div>
+                        <?php notify_pending_track() ?>
                         <h1><?php $welcome = mylang_translate('welcome');print_r($welcome); ?></h1>
 
                         <div class="about-text">

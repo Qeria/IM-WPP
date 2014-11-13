@@ -18,6 +18,9 @@ if(array_key_exists('start_again', $_GET)) {
     delete_option('track');
     delete_option('javascript_code');
 }
+
+if (!get_option('notify_incomplete')) update_option('notify_incomplete', 'yes');
+
 $edit_code = array_key_exists('edit', $_GET) && !$_POST;
 ?>
 <div class="wrap">

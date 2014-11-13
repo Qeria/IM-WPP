@@ -135,3 +135,23 @@ function mylang_translate($key)
 
     return $lang_data[$key];
 }
+
+function notify_pending_track()
+{
+    (!(get_option('track') && get_option('javascript_code')) && get_option('notify_incomplete'))
+        ? pink_notify('pending_notification', (get_current_screen()->id != 'innometrics_page_innometricssetting'
+        ? 'pending_notification_button' : '')) : null ;
+}
+
+function pink_notify($text_lang = '', $button_lang = '')
+{
+    $html = '';
+    if ($text_lang || $button_lang) {
+        $html .= '<div class="updated pink-notice">';
+        $html .= '<p>' . mylang_translate($text_lang) . '</p>';
+        $html .= $button_lang ? '<p class="submit"><a href="'.admin_url('admin.php?page=innometricssetting').'" class="button-primary">'
+              . mylang_translate($button_lang) . '</a></p>' : '';
+        $html .= '</div>';
+    }
+    echo $html;
+}

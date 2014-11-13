@@ -8,6 +8,7 @@ if (isset($_POST['Submit'])) {
     <div class="set_outer">
         <div class="pluginheader"><img src="../wp-content/plugins/<?php echo PROF_FOLDER; ?>/images/innometrics_logo.png"/></div>
         <h1 class="lowerheader"><?php $setting_word = mylang_translate('Settings'); echo $setting_word;?></h1>
+        <?php notify_pending_track() ?>
         <form name="setting_form" method="post" action="" onsubmit="" id="setting_form" enctype="multipart/form-data">
             <table class="form-table">
                 <tbody>

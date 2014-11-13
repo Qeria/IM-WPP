@@ -70,6 +70,8 @@ return array('Setting_code_line'=>"Please paste the code provided to your accoun
     'general' => 'General',
     'environment' => 'Environment',
     'tracking_notice'=>"Innometrics Profile Cloud collects anonymous stats about your Wordpress installation to improve future development.",
+    'pending_notification' => 'Your website tracking setup is not complete',
+    'pending_notification_button' => 'Setup Tracking',
     'xx' => 'xx',
 );
 ?>

@@ -157,6 +157,7 @@ define('PROF_FOLDER', dirname(plugin_basename(__FILE__)));
  ?>
 <div class="activate_list_page">
                 <div class="pluginheader"><img src="../wp-content/plugins/<?php echo PROF_FOLDER; ?>/images/innometrics_logo.png"/></div>
+    <?php notify_pending_track() ?>
                         <div class="lowerheader"><?php $Activate_Tracking = mylang_translate('Activate_Tracking');print_r($Activate_Tracking); ?></div>
                         <div class="bottom_header"><?php $Activate_innometrics = mylang_translate('Activate_innometrics');print_r($Activate_innometrics); ?><br/></div>    
         <div class="Activatepage_list" id="users_list">
