@@ -8,7 +8,6 @@ Author URI: http://www.innometrics.com/
 Plugin URI: http://www.innometrics.com/resources/
 Text Domain: innometrics
 */
-ob_start();
 
 define('PROF_FOLDER', dirname(plugin_basename(__FILE__)));
 define('PROF_URL', $siteurl.'/wp-content/plugins/' . PROF_FOLDER);
@@ -40,27 +39,29 @@ function load_innometrics_plugin() {
 }
 add_action( 'admin_init', 'load_innometrics_plugin' );
 
-function quick_activate_or_welcome() {
-    include(((get_option('track') && get_option('javascript_code')) ? 'welcome_screen' : 'info_form').'.php');
-}
-function show_settings_menu() {
-    include('info_settings.php');
-}
-
-function show_activate_menu() {
-    include('activate_pages.php');
-}
-
-function welcome_screen(){
-    include ('welcome_screen.php');
+function load_page() {
+    $page = array_key_exists('page', $_GET) ? $_GET['page'] : '';
+    switch($page) {
+        case 'innometricssetting':
+            $name = 'info_settings'; break;
+        case 'innometricsactivate':
+            $name = 'activate_pages'; break;
+        case 'im-wpp/innometrics.php':
+            $name = 'info_form';
+            if (!(get_option('track') && get_option('javascript_code')))
+                break;
+        default:
+            $name = 'welcome_screen';
+    }
+    include ($name.'.php');
 }
 
 function Form_admin_actions1() {
-    add_menu_page("Innometrics", "Innometrics", 1,__FILE__ , "quick_activate_or_welcome",'../wp-content/plugins/'
+    add_menu_page("Innometrics WP Integration", "Innometrics", 1,__FILE__ , "load_page",'../wp-content/plugins/'
         . PROF_FOLDER .'/images/sidebar_icon_active.png');
-    add_submenu_page(__FILE__,'Activate','Activate','8','innometricsactivate','show_activate_menu');
-    add_submenu_page(__FILE__,'Settings','Settings','8','innometricssetting','show_settings_menu');
-    add_submenu_page(null,'','','8','welcome_screen','welcome_screen');
+    add_submenu_page(__FILE__,'Activate','Activate','8','innometricsactivate','load_page');
+    add_submenu_page(__FILE__,'Settings','Settings','8','innometricssetting', 'load_page');
+    add_submenu_page(true,'Innometrics WP Integration','Innometrics','8','welcome_screen','load_page');
 }
 add_action('admin_menu', 'Form_admin_actions1');
 
@@ -86,14 +87,12 @@ function myscript() {
 
 add_action( 'wp_footer', 'myscript' ,200);
 
-function curl($url,$params = array(),$is_coockie_set = false)
+/*function curl($url,$params = array(),$is_coockie_set = false)
 {
 
     if(!$is_coockie_set){
-        /* STEP 1. let's create a cookie file */
         $ckfile = tempnam ("/tmp", "CURLCOOKIE");
 
-        /* STEP 2. visit the homepage to set the cookie properly */
         $ch = curl_init ($url);
         curl_setopt ($ch, CURLOPT_COOKIEJAR, $ckfile);
         curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
@@ -108,7 +107,6 @@ function curl($url,$params = array(),$is_coockie_set = false)
     if(!empty($str_arr))
         $str = '?'.implode('&',$str_arr);
 
-    /* STEP 3. visit cookiepage.php */
 
     $Url = $url.$str;
 
@@ -118,7 +116,7 @@ function curl($url,$params = array(),$is_coockie_set = false)
 
     $output = curl_exec ($ch);
     return $output;
-}
+}*/
 
 function mylang_translate($key)
 {

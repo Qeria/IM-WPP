@@ -32,7 +32,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
     </div>
 </div>
 <p class="innometrics-actions">
-    <a href="<?php echo admin_url('admin.php?page=innometrics/innometrics.php'); ?>" class="button-primary"><?php $setting_word = mylang_translate('Settings');echo $setting_word;?></a>
+    <a href="<?php echo admin_url('admin.php?page=innometricssetting'); ?>" class="button-primary"><?php $setting_word = mylang_translate('Settings');echo $setting_word;?></a>
     <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.innometrics.com/" data-text="Profile Cloud - Customer Data Management System" data-via="Innometrics" data-size="large" data-hashtags="innometrics">Tweet</a>
     <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 </p>
@@ -88,7 +88,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 
     <div class="return-to-dashboard">
-        <a href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'innometrics/innometrics.php' ), 'admin.php' ) ) ); ?>"><?php $goto_innometrics = mylang_translate('goto_innometrics');print_r($goto_innometrics); ?></a>
+        <a href="<?php echo esc_url( admin_url( add_query_arg( array( 'page' => 'innometricssetting' ), 'admin.php' ) ) ); ?>"><?php $goto_innometrics = mylang_translate('goto_innometrics');print_r($goto_innometrics); ?></a>
     </div>
 </div>
 
