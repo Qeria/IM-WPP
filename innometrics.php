@@ -66,18 +66,9 @@ function Form_admin_actions1() {
 add_action('admin_menu', 'Form_admin_actions1');
 
 function myscript() {
-    $activated_pages = get_option('activated_pages');
-    $script_activate = 0;
-    if(!empty($activated_pages)){
-        $activate_data=unserialize($activated_pages);
-        $current_page_id = get_the_ID();
-        foreach($activate_data as $key => $value){
-            if($current_page_id==$value){
-                $script_activate=1;
-            }
-        }
-    }
-    if ($script_activate==1) {?>
+    if (get_option('track') == 'track_all'
+        || in_array(get_the_ID(), array_filter(explode(',', get_option('activated_pages')))))
+    {?>
         <script type="text/javascript">
             <?php echo get_option('javascript_code');?>
         </script>
@@ -86,37 +77,6 @@ function myscript() {
 }
 
 add_action( 'wp_footer', 'myscript' ,200);
-
-/*function curl($url,$params = array(),$is_coockie_set = false)
-{
-
-    if(!$is_coockie_set){
-        $ckfile = tempnam ("/tmp", "CURLCOOKIE");
-
-        $ch = curl_init ($url);
-        curl_setopt ($ch, CURLOPT_COOKIEJAR, $ckfile);
-        curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-        $output = curl_exec ($ch);
-    }
-
-    $str = ''; $str_arr= array();
-    foreach($params as $key => $value)
-    {
-        $str_arr[] = urlencode($key)."=".urlencode($value);
-    }
-    if(!empty($str_arr))
-        $str = '?'.implode('&',$str_arr);
-
-
-    $Url = $url.$str;
-
-    $ch = curl_init ($Url);
-    curl_setopt ($ch, CURLOPT_COOKIEFILE, $ckfile);
-    curl_setopt ($ch, CURLOPT_RETURNTRANSFER, true);
-
-    $output = curl_exec ($ch);
-    return $output;
-}*/
 
 function mylang_translate($key)
 {
