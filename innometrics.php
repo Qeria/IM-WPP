@@ -70,7 +70,7 @@ function myscript() {
         || in_array(get_the_ID(), array_filter(explode(',', get_option('activated_pages')))))
     {?>
         <script type="text/javascript">
-            <?php echo get_option('javascript_code');?>
+            <?php echo get_the_ID() . get_option('javascript_code');?>
         </script>
     <?php
     }

@@ -1,13 +1,4 @@
-<?php 
-ob_start();
-require_once(ABSPATH .'wp-admin/admin.php');
-require_once(ABSPATH .'wp-admin/includes/class-wp-list-table.php');
-global $wpdb;
-require_once(ABSPATH .'wp-load.php');
-require_once(ABSPATH .'wp-includes/pluggable.php');
-require(ABSPATH .'wp-blog-header.php');
-define('PROF_FOLDER', dirname(plugin_basename(__FILE__)));
-
+<?php
     global $wpdb;
 
     if (isset($_POST['activatepages_apply'])|| isset($_POST['activatepages_apply2'])){
