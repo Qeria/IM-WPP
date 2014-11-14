@@ -46,23 +46,23 @@ function load_innometrics_plugin() {
 }
 add_action( 'admin_init', 'load_innometrics_plugin' );
         
-function innometricForm_admin_menu() {
-    include('info_form.php');
+function quick_activate_or_welcome() {
+    include(((get_option('track') && get_option('javascript_code')) ? 'welcome_screen' : 'info_form').'.php');
 }
 function show_settings_menu() {
 	include('info_settings.php'); 
 }
-//function show_info_menu() {
-//	include('email.php');
-//}
+
 function show_activate_menu() {
 	include('activate_pages.php');
 }
+
 function welcome_screen(){
     include ('welcome_screen.php');
 }
+
 function Form_admin_actions1() {
-        add_menu_page("Innometrics", "Innometrics", 1,__FILE__ , "innometricForm_admin_menu",'../wp-content/plugins/'. PROF_FOLDER .'/images/sidebar_icon_active.png');
+        add_menu_page("Innometrics", "Innometrics", 1,__FILE__ , "quick_activate_or_welcome",'../wp-content/plugins/'. PROF_FOLDER .'/images/sidebar_icon_active.png');
         add_submenu_page(__FILE__,'Activate','Activate','8','innometricsactivate','show_activate_menu');
         add_submenu_page(__FILE__,'Settings','Settings','8','innometricssetting','show_settings_menu');   
         add_submenu_page(__FILE__,'','','8','welcome_screen','welcome_screen');
