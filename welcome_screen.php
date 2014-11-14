@@ -32,18 +32,15 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
                     </div>
                 </div>
 		<p class="innometrics-actions">
-			<a href="<?php echo admin_url('admin.php?page=innometrics/innometrics.php'); ?>" class="submit_button"><?php $setting_word = mylang_translate('Settings');echo $setting_word;?></a>
-			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.woothemes.com/woocommerce/" data-text="A open-source (free) #ecommerce plugin for #WordPress that helps you sell anything. Beautifully." data-via="WooThemes" data-size="large" data-hashtags="WooCommerce">Tweet</a>
+			<a href="<?php echo admin_url('admin.php?page=innometrics/innometrics.php'); ?>" class="button-primary"><?php $setting_word = mylang_translate('Settings');echo $setting_word;?></a>
+			<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://www.innometrics.com/" data-text="Profile Cloud - Customer Data Management System" data-via="Innometrics" data-size="large" data-hashtags="innometrics">Tweet</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</p>
 
-		<div class="setting_tabs">
-			<a class="welcome-tabs active_class" id="whats_tab" href="">
-				<?php $whats_new = mylang_translate('whats_new');print_r($whats_new); ?>
-			</a><a class="welcome-tabs" href="" id="credit_tab">
-				<?php $Credits = mylang_translate('Credits');print_r($Credits); ?>
-			</a>
-		</div>
+<h2 class="nav-tab-wrapper">
+    <a class="nav-tab nav-tab-active" id="whats_tab" href=""><?php echo mylang_translate('whats_new'); ?></a>
+    <a class="nav-tab" id="credit_tab" href=""><?php echo mylang_translate('Credits'); ?></a>
+</h2>
 
 		<div class="wrap about-wrap">
 

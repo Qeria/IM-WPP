@@ -34,8 +34,8 @@ jQuery( document ).ready(function() {
 
          jQuery("#credits").css('display', 'none');
 		 jQuery("#whats_new").css('display', 'block');
-                 jQuery('#whats_tab').removeClass('').addClass('active_class');
-                 jQuery('#credit_tab').removeClass('active_class').addClass('');
+                 jQuery('#whats_tab').removeClass('').addClass('nav-tab-active');
+                 jQuery('#credit_tab').removeClass('nav-tab-active').addClass('');
     }); 
         jQuery("#whats_tab").click(function(event){
         event.preventDefault();
@@ -45,8 +45,8 @@ jQuery( document ).ready(function() {
 
          jQuery("#whats_new").css('display', 'none');
 		 jQuery("#credits").css('display', 'block');
-                 jQuery('#credit_tab').removeClass('').addClass('active_class');
-                 jQuery('#whats_tab').removeClass('active_class').addClass('');
+                 jQuery('#credit_tab').removeClass('').addClass('nav-tab-active');
+                 jQuery('#whats_tab').removeClass('nav-tab-active').addClass('');
     }); 
         jQuery("#credit_tab").click(function(event){
         event.preventDefault();
