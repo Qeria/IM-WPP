@@ -59,24 +59,28 @@ function load_page() {
 function Form_admin_actions1() {
     add_menu_page("Innometrics WP Integration", "Innometrics", 1,__FILE__ , "load_page",'../wp-content/plugins/'
         . PROF_FOLDER .'/images/sidebar_icon_active.png');
-    add_submenu_page(__FILE__,'Activate','Activate','8','innometricsactivate','load_page');
+    $hook = add_submenu_page(__FILE__,'Activate','Activate','8','innometricsactivate','load_page');
+    add_action("load-$hook", 'activate_screen_option');
     add_submenu_page(__FILE__,'Settings','Settings','8','innometricssetting', 'load_page');
     add_submenu_page(true,'Innometrics WP Integration','Innometrics','8','welcome_screen','load_page');
 }
-add_action('admin_menu', 'Form_admin_actions1');
 
-function myscript() {
-    if (get_option('track') == 'track_all'
-        || in_array(get_the_ID(), array_filter(explode(',', get_option('activated_pages')))))
-    {?>
-        <script type="text/javascript">
-            <?php echo get_the_ID() . get_option('javascript_code');?>
-        </script>
-    <?php
-    }
+add_action('admin_menu', 'Form_admin_actions1');
+function activate_screen_option() {
+    add_screen_option('per_page', array(
+        'label' => 'Items',
+        'default' => 4,
+        'option' => 'innometrics_activate_row_limit'
+    ));
 }
 
-add_action( 'wp_footer', 'myscript' ,200);
+add_filter('set-screen-option', 'activate_set_option', 10, 3);
+function activate_set_option($status, $option, $value) {
+    if ( 'innometrics_activate_row_limit' == $option ) return $value;
+
+    return $status;
+}
+
 
 function mylang_translate($key)
 {
@@ -104,5 +108,29 @@ function pink_notify($text_lang = '', $button_lang = '')
             . mylang_translate($button_lang) . '</a></p>' : '';
         $html .= '</div>';
     }
+
     echo $html;
 }
+
+function activated_pages($set = array(), $remove = false) {
+    if ($set) {
+        if (!is_array($set)) $set = array($set);
+        $array = $remove ? array_diff(activated_pages(), $set) : array_unique(array_merge(activated_pages(), $set));
+        update_option('activated_pages', implode(',', $array));
+    }
+
+    return array_filter(array_map('trim', explode(',', get_option('activated_pages'))), 'is_numeric');
+}
+
+function myscript() {
+    if (get_option('track') == 'track_all'
+        || in_array(get_the_ID(), array_filter(explode(',', get_option('activated_pages')))))
+    {?>
+        <script type="text/javascript">
+            <?php echo get_the_ID() . get_option('javascript_code');?>
+        </script>
+    <?php
+    }
+}
+
+add_action( 'wp_footer', 'myscript' ,200);

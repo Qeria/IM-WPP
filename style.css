@@ -409,3 +409,7 @@ a.image_register{
 
 table.status_table td mark.yes {color: #7ad03a;}
 table.status_table td mark {background: none repeat scroll 0 0 rgba(0, 0, 0, 0);}
+td.column-status > span { color: #fe0202; }
+td.column-status span.bull-icon { background: none repeat scroll 0 0 #fe0202; border-radius: 50%; display: inline-block; height: 12px; line-height: 16px; margin-left: 6px;width: 12px;vertical-align: middle;}
+td.column-status > span.yes-tracking {color: #02b230;}
+td.column-status span.yes-tracking span.bull-icon {background-color: #02b230;}

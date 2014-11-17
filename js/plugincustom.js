@@ -29,8 +29,18 @@ jQuery( document ).ready(function() {
         jQuery("#system_status_button").click(function(event){
         event.preventDefault();
     });*/
-    
-    jQuery("#whats_tab").click(function() {  
+
+
+
+    jQuery("a.toggle_tracking").click(function(e) {
+        e.preventDefault();
+        jQuery('input[name="ids[]"]').attr('checked', false);
+        jQuery(this).parents('tr').find('th:eq(0) input').click();
+        jQuery('#bulk-action-selector-top').val(jQuery(this).is('.start')?'start':'stop');
+        jQuery('#doaction').click();
+    });
+
+    jQuery("#whats_tab").click(function() {
 
          jQuery("#credits").css('display', 'none');
 		 jQuery("#whats_new").css('display', 'block');

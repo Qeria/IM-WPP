@@ -104,7 +104,7 @@ function email_data(){
     <tbody>
 	<tr>
             <td>OS:</td>
-	    <td>'.PHP_OS.'</td>
+	    <td>'.PHP_OS.'</td>F
 	</tr>
 	<tr>
 	    <td>Site Url:</td>';
