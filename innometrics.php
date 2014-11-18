@@ -48,7 +48,8 @@ function load_page() {
             $name = 'activate_pages'; break;
         case 'im-wpp/innometrics.php':
             $name = 'info_form';
-            if (!(get_option('track') && get_option('javascript_code')))
+            if (!(get_option('track') && get_option('javascript_code') && get_option('new_home_page'))
+                || array_key_exists('edit', $_GET))
                 break;
         default:
             $name = 'welcome_screen';
@@ -123,9 +124,7 @@ function activated_pages($set = array(), $remove = false) {
 }
 
 function myscript() {
-    if (get_option('track') == 'track_all'
-        || in_array(get_the_ID(), array_filter(explode(',', get_option('activated_pages')))))
-    {?>
+    if (get_option('track') == 'track_all' || in_array(get_the_ID(), activated_pages())) {?>
         <script type="text/javascript">
             <?php echo get_the_ID() . get_option('javascript_code');?>
         </script>
