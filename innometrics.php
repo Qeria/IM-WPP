@@ -48,7 +48,7 @@ function load_page() {
             $name = 'activate_pages'; break;
         case 'im-wpp/innometrics.php':
             $name = 'info_form';
-            if (!(get_option('track') && get_option('javascript_code') && get_option('new_home_page'))
+            if (!(get_option('track') && get_option('javascript_code') && get_option('setup_done'))
                 || array_key_exists('edit', $_GET))
                 break;
         default:
@@ -94,8 +94,13 @@ function mylang_translate($key)
 
 function notify_pending_track()
 {
-    (!(get_option('track') && get_option('javascript_code')) && get_option('notify_incomplete'))
-        ? pink_notify('pending_notification', (get_current_screen()->id != 'innometrics_page_innometricssetting'
+    $notify = false;
+    if (!(get_option('javascript_code') && get_option('setup_done'))) $notify = true;
+
+    if (get_option('track') == 'track_all' || !(get_option('track') == 'track_some' && count(activated_pages())))
+        $notify = true;
+
+    $notify ? pink_notify('pending_notification', (get_current_screen()->id != 'innometrics_page_innometricssetting'
         ? 'pending_notification_button' : '')) : null ;
 }
 

@@ -21,15 +21,13 @@ if(array_key_exists('start_again', $_GET) && !$_POST) {
     delete_option('track');
     delete_option('javascript_code');
     delete_option('plugin_stats');
-    delete_option('new_home_page');
+    delete_option('setup_done');
     $edit_code = true;
 }
 
 if (!$_POST && get_option('track') && get_option('javascript_code'))
-    update_option('new_home_page', 'yes');
-else delete_option('new_home_page');
-
-if (!get_option('notify_incomplete')) update_option('notify_incomplete', 'yes');
+    update_option('setup_done', 'yes');
+else delete_option('setup_done');
 
 $javas_code = get_option('javascript_code');
 ?>

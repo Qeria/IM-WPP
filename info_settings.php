@@ -1,7 +1,8 @@
 <?php
 if (isset($_POST['Submit'])) {
     update_option('javascript_code', array_key_exists('javascript_code', $_POST) ? trim(stripslashes($_POST['javascript_code']) ) : '');
-    update_option('track', array_key_exists('javascript_code', $_POST) && $_POST['track_all_sites'] ? 'track_all' : get_option('track'));
+    update_option('track', array_key_exists('javascript_code', $_POST) && $_POST['track_all_sites'] ? 'track_all' : 'track_some');
+    update_option('plugin_stats', array_key_exists('plugin_stats', $_POST) && $_POST['plugin_stats'] ? $_POST['plugin_stats'] : '');
 }
 ?>
 <div class="wrap">
@@ -26,6 +27,13 @@ if (isset($_POST['Submit'])) {
                     <td>
                         <p><input id="setting_track_all" type="checkbox" name="track_all_sites" value="track_all" <?php echo get_option('track')=="track_all" ? 'checked="checked"':'';?> />
                             <?php echo mylang_translate('With_this'); ?> <a href="#"><?php echo mylang_translate('for_more'); ?></a></p>
+                    </td>
+                </tr>
+                <tr valign="top">
+                    <th><?php echo mylang_translate("Plug_in_stats")?></th>
+                    <td>
+                        <p><input id="plugin_stats" type="checkbox" name="plugin_stats" value="yes" <?php echo get_option('plugin_stats')=="yes" ? 'checked="checked"':'';?> />
+                            <?php echo mylang_translate('pluginstat_line'); ?> <a href="#"><?php echo mylang_translate('pluginstat_info'); ?></a></p>
                     </td>
                 </tr>
                 <tr valign="top">

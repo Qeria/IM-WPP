@@ -176,7 +176,7 @@ $activate->prepare_items();
         <?php echo mylang_translate('Activate_Tracking');?>
     </h2>
     <p><?php echo mylang_translate('Activate_innometrics');?> </p>
-
+    <?php notify_pending_track() ?>
     <ul class="subsubsub">
         <li><a href="?page=<?php echo $_GET['page']?>" class="<?php echo (!array_key_exists('type', $_GET) && (!array_key_exists('s', $_GET) ||  !$_GET['s']))?'current':''?>">All <span class="count">(<?php echo $activate->total_items?>)</span></a> |</li>
         <li><a href="?page=<?php echo $_GET['page']?>&type=page" class="<?php echo (array_key_exists('type', $_GET) && $_GET['type']=='page')?'current':''?>">Pages <span class="count">(<?php echo $activate->total_pages?>)</span></a> |</li>
