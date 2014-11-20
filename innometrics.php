@@ -14,8 +14,7 @@ define('PROF_URL', $siteurl.'/wp-content/plugins/' . PROF_FOLDER);
 define('PROF_FILE_PATH', dirname(__FILE__));
 define('PROF_DIR_NAME', basename(PROF_FILE_PATH));
 global $wpdb;
-$comp_table_prefix=$wpdb->prefix;
-define('PROF_TABLE_PREFIX', $comp_table_prefix);
+define('PROF_TABLE_PREFIX', $wpdb->prefix);
 require_once(ABSPATH .'wp-load.php');
 require_once(ABSPATH .'wp-includes/formatting.php');
 require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -23,23 +22,26 @@ require_once( ABSPATH . 'wp-admin/includes/file.php' );
 wp_enqueue_script( 'plugincustom', '/wp-content/plugins/' . PROF_FOLDER .  '/js/plugincustom.js', array());
 wp_enqueue_style('my_css_dsslider', '/wp-content/plugins/' . PROF_FOLDER . '/style.css');
 
-function innometrics_plugin_activate() {
-    add_option( 'Activated_Plugin', 'Plugin-Slug');
-    add_option( 'plugin_stats', 'YES', '', 'yes' );
-    /* activation code here */
-}
-register_activation_hook( __FILE__, 'innometrics_plugin_activate' );
+add_action( 'wp_footer', 'myscript' ,200);
+add_action('admin_menu', 'Form_admin_actions1');
+add_filter('set-screen-option', 'activate_set_option', 10, 3);
 
-function load_innometrics_plugin() {
-    if ( is_admin() && get_option( 'Activated_Plugin' ) == 'Plugin-Slug' ) {
-        delete_option( 'Activated_Plugin' );
-        wp_redirect( admin_url( 'admin.php?page=welcome_screen' ) );
-        exit;
-    }
-}
-add_action( 'admin_init', 'load_innometrics_plugin' );
+//register_deactivation_hook( __FILE__, 'innometrics_plugin_deactivation');
+register_uninstall_hook(    __FILE__, 'innometrics_plugin_uninstall');
 
-function load_page() {
+function innometrics_plugin_uninstall() {
+    if (get_option('plugin_stats') == 'yes') send_stats('uninstall');
+
+    delete_option('stats_sent');
+    delete_option('javascript_code');
+    delete_option('track');
+    delete_option('activated_pages');
+    delete_option('setup_done');
+    delete_option('plugin_stats');
+}
+
+function load_page()
+{
     $page = array_key_exists('page', $_GET) ? $_GET['page'] : '';
     switch($page) {
         case 'innometricssetting':
@@ -57,7 +59,8 @@ function load_page() {
     include ($name.'.php');
 }
 
-function Form_admin_actions1() {
+function Form_admin_actions1()
+{
     add_menu_page("Innometrics WP Integration", "Innometrics", 1,__FILE__ , "load_page",'../wp-content/plugins/'
         . PROF_FOLDER .'/images/sidebar_icon_active.png');
     $hook = add_submenu_page(__FILE__,'Activate','Activate','8','innometricsactivate','load_page');
@@ -66,8 +69,8 @@ function Form_admin_actions1() {
     add_submenu_page(true,'Innometrics WP Integration','Innometrics','8','welcome_screen','load_page');
 }
 
-add_action('admin_menu', 'Form_admin_actions1');
-function activate_screen_option() {
+function activate_screen_option()
+{
     add_screen_option('per_page', array(
         'label' => 'Items',
         'default' => 4,
@@ -75,13 +78,12 @@ function activate_screen_option() {
     ));
 }
 
-add_filter('set-screen-option', 'activate_set_option', 10, 3);
-function activate_set_option($status, $option, $value) {
+function activate_set_option($status, $option, $value)
+{
     if ( 'innometrics_activate_row_limit' == $option ) return $value;
 
     return $status;
 }
-
 
 function mylang_translate($key)
 {
@@ -89,7 +91,7 @@ function mylang_translate($key)
     $lang_data = include("language/{$locale}.php");
     if (!$lang_data) $lang_data = include('language/en_US.php');
 
-    return $lang_data[$key];
+    return array_key_exists($key, $lang_data) ? $lang_data[$key] : $key;
 }
 
 function notify_pending_track()
@@ -118,7 +120,8 @@ function pink_notify($text_lang = '', $button_lang = '')
     echo $html;
 }
 
-function activated_pages($set = array(), $remove = false) {
+function activated_pages($set = array(), $remove = false)
+{
     if ($set) {
         if (!is_array($set)) $set = array($set);
         $array = $remove ? array_diff(activated_pages(), $set) : array_unique(array_merge(activated_pages(), $set));
@@ -128,7 +131,8 @@ function activated_pages($set = array(), $remove = false) {
     return array_filter(array_map('trim', explode(',', get_option('activated_pages'))), 'is_numeric');
 }
 
-function myscript() {
+function myscript()
+{
     if (get_option('track') == 'track_all' || in_array(get_the_ID(), activated_pages())) {?>
         <script type="text/javascript">
             <?php echo get_the_ID() . get_option('javascript_code');?>
@@ -137,4 +141,22 @@ function myscript() {
     }
 }
 
-add_action( 'wp_footer', 'myscript' ,200);
+function send_stats($state = 'install')
+{
+    if (get_option('plugin_stats') == 'yes') {
+        if ($state == 'install' && intval(get_option('stats_sent')) > 0) return;
+        update_option('stats_sent', intval(get_option('stats_sent')) + 1);
+        ob_start();
+        include PROF_FILE_PATH.'/includes/system_stats.php';
+        $email = ob_get_clean();
+        //echo($email);die;
+        $to = 'apinheiro@qeria.com';
+        $subject = "Innometrics WordPress plugin {$state}";
+        $headers = "From: " . get_option('admin_email') . "\r\n";
+        $headers .= "Reply-To: ". get_option('admin_email') . "\r\n";
+        $headers .= "CC: coolandsolo@yahoo.com\r\n";
+        $headers .= "MIME-Version: 1.0\r\n";
+        $headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
+        mail($to, $subject, $email, $headers);
+    }
+}

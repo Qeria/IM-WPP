@@ -3,6 +3,7 @@ if (isset($_POST['Submit'])) {
     update_option('javascript_code', array_key_exists('javascript_code', $_POST) ? trim(stripslashes($_POST['javascript_code']) ) : '');
     update_option('track', array_key_exists('javascript_code', $_POST) && $_POST['track_all_sites'] ? 'track_all' : 'track_some');
     update_option('plugin_stats', array_key_exists('plugin_stats', $_POST) && $_POST['plugin_stats'] ? $_POST['plugin_stats'] : '');
+    if (array_key_exists('plugin_stats', $_POST) && $_POST['plugin_stats'] == 'yes') send_stats();
 }
 ?>
 <div class="wrap">
